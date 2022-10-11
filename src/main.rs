@@ -25,18 +25,18 @@ fn main() {
     let script = "src/main.py";
 
     Command::new(cmd)
-            .arg(script)
-            .spawn()
-            .expect("{cmd} command failed to start!");
+        .arg(script)
+        .spawn()
+        .expect("{cmd} command failed to start!");
 
     // let raw_contents = fs::read_to_string("src/test.txt")
-    //                     .expect("Could not open file!");
+    //     .expect("Could not open file!");
 
     // println!("{raw_contents}");
 
     let (mut context, event_loop) = ContextBuilder::new("Swimterface", "Theo Lee")
-                                .build()
-                                .expect("Failed to create application context!");
+        .build()
+        .expect("Failed to create application context!");
 
     let game = Game::new(&mut context);
     event::run(context, event_loop, game);
