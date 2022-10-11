@@ -8,10 +8,26 @@ def main():
         webpage = src.read()
 
     soup = BeautifulSoup(webpage, "html.parser")
-    title = soup.find("title")
+    title = soup.title.text.strip()
+    table = soup.find("div", {"id": "js-swimmer-profile-times"}).table
+    header = table.thead.text.strip().replace('\n', " ").replace("  ", ' ').replace(' ', " | ")
+    body = table.tbody
 
     with open("src/test.txt", 'w', encoding="UTF-8") as dst:
-        dst.write(title.text.strip())
+        dst.write(f"{title}\n")
+        dst.write(f"{header}\n")
+
+        rows = body.find_all("tr")
+
+        for row in rows:
+            cols = row.find_all("td")
+            entry = ""
+
+            for col in cols:
+                entry += col.text.strip() + " | "
+
+            entry = entry.replace("| X |", '|').replace("|  |", '|').strip()
+            dst.write(f"{entry}\n")
 
 if __name__ == "__main__":
     main()
