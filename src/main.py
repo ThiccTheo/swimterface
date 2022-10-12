@@ -1,10 +1,12 @@
+from sys import argv
 from urllib.request import HTTPCookieProcessor, build_opener
 from bs4 import BeautifulSoup
 
 def main():
     opener = build_opener(HTTPCookieProcessor())
+    url = f"https://www.swimcloud.com/swimmer/{argv[1].strip()}/"
 
-    with opener.open("https://www.swimcloud.com/swimmer/1644519/") as src:
+    with opener.open(url) as src:
         webpage = src.read()
 
     soup = BeautifulSoup(webpage, "html.parser")
@@ -13,9 +15,10 @@ def main():
     header = table.thead.text.strip().replace('\n', " ").replace("  ", ' ').replace(' ', " | ")
     body = table.tbody
 
-    with open("src/test.txt", 'w', encoding="UTF-8") as dst:
-        dst.write(f"{title}\n")
-        dst.write(f"{header}\n")
+    swimmer_name = title[:title.index('|', 0)].strip().replace(' ', '_').lower()
+
+    with open(f"src/user_{swimmer_name}.txt", 'w', encoding="UTF-8") as dst:
+        dst.write(f"{title}\n{header}\n")
 
         rows = body.find_all("tr")
 
