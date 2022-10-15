@@ -9,12 +9,12 @@ use ggez::{
     ContextBuilder,
 };
 use splash_screen::SplashScreen;
+use state::Action;
 use std::{
     io::{stdin, stdout, Write},
     path::PathBuf,
     process::Command,
 };
-use state::Action;
 
 fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));

@@ -30,7 +30,7 @@ impl App {
                 Action::Change(state) => {
                     self.states.pop();
                     self.states.push(state);
-                },
+                }
             }
         }
     }
