@@ -2,6 +2,7 @@ from sys import argv
 from urllib.request import HTTPCookieProcessor, build_opener
 from bs4 import BeautifulSoup
 
+
 def main():
     opener = build_opener(HTTPCookieProcessor())
     url = f"https://www.swimcloud.com/swimmer/{argv[1].strip()}/"
@@ -12,12 +13,17 @@ def main():
     soup = BeautifulSoup(webpage, "html.parser")
     title = soup.title.text.strip()
     table = soup.find("div", {"id": "js-swimmer-profile-times"}).table
-    header = table.thead.text.strip().replace('\n', " ").replace("  ", ' ').replace(' ', " | ")
+    header = (
+        table.thead.text.strip()
+        .replace("\n", " ")
+        .replace("  ", " ")
+        .replace(" ", " | ")
+    )
     body = table.tbody
 
-    swimmer_name = title[:title.index('|', 0)].strip().replace(' ', '_').lower()
+    swimmer_name = title[: title.index("|", 0)].strip().replace(" ", "_").lower()
 
-    with open(f"src/user_{swimmer_name}.txt", 'w', encoding="UTF-8") as dst:
+    with open(f"src/user_{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
         dst.write(f"{title}\n{header}\n")
 
         rows = body.find_all("tr")
@@ -29,8 +35,9 @@ def main():
             for col in cols:
                 entry += col.text.strip() + " | "
 
-            entry = entry.replace("| X |", '|').replace("|  |", '|').strip()
+            entry = entry.replace("| X |", "|").replace("|  |", "|").strip()
             dst.write(f"{entry}\n")
+
 
 if __name__ == "__main__":
     main()
