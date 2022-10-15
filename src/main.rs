@@ -45,7 +45,7 @@ fn main() {
 
     let window_setup = WindowSetup::default()
         .title("Swimterface")
-        .icon("\\logo.png")
+        .icon("\\transparent_logo.png")
         .vsync(true);
 
     let window_mode = WindowMode::default().dimensions(1280.0, 720.0);

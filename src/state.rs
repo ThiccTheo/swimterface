@@ -4,7 +4,7 @@ pub type State = Box<dyn EventHandler>;
 
 pub enum Action {
     None,
-    Error,
+    Error(String),
     Create(State),
     Destroy,
     Change(State),

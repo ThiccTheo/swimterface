@@ -1,6 +1,5 @@
-use std::collections::VecDeque;
-
 use crate::state::{Action, State};
+use std::collections::VecDeque;
 use ggez::{event::EventHandler, Context, GameError};
 
 pub struct App {
@@ -24,7 +23,7 @@ impl App {
         while let Some(action) = self.actions.pop_front() {
             match action {
                 Action::None => (),
-                Action::Error => todo!(),
+                Action::Error(msg) => panic!("{msg}"),
                 Action::Create(state) => self.states.push(state),
                 Action::Destroy => drop(self.states.pop()),
                 Action::Change(state) => {
