@@ -1,5 +1,8 @@
+mod app;
 mod splash_screen;
+mod state;
 
+use app::App;
 use ggez::{
     conf::{FullscreenType, WindowMode, WindowSetup},
     event::run,
@@ -11,6 +14,7 @@ use std::{
     path::PathBuf,
     process::Command,
 };
+use state::Action;
 
 fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
@@ -34,7 +38,7 @@ fn main() {
         .expect("{cmd} command failed to start!");
 
     let mut resource_path = root.clone();
-    resource_path.push("assets");
+    resource_path.push("assets\\graphics");
 
     let context_builder =
         ContextBuilder::new("Swimterface", "Theo Lee").add_resource_path(resource_path);
@@ -44,16 +48,17 @@ fn main() {
         .icon("\\logo.png")
         .vsync(true);
 
-    let window_mode = WindowMode::default()
-        .dimensions(1280.0, 720.0);
-        //.fullscreen_type(FullscreenType::True);
+    let window_mode = WindowMode::default().dimensions(1280.0, 720.0);
+    //.fullscreen_type(FullscreenType::True);
 
-    let (mut context, event_loop) = context_builder
+    let (context, event_loop) = context_builder
         .window_setup(window_setup)
         .window_mode(window_mode)
         .build()
         .expect("Could not start application!");
 
-    let splash_screen = SplashScreen::new(&mut context);
-    run(context, event_loop, splash_screen);
+    let mut app = App::new();
+    app.add_action(Action::Create(Box::new(SplashScreen::new(&context))));
+
+    run(context, event_loop, app);
 }

@@ -23,7 +23,7 @@ def main():
 
     swimmer_name = title[: title.index("|", 0)].strip().replace(" ", "_").lower()
 
-    with open(f"src/user_{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
+    with open(f"assets\\data\\user_{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
         dst.write(f"{title}\n{header}\n")
 
         rows = body.find_all("tr")
