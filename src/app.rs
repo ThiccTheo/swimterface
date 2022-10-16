@@ -17,12 +17,12 @@ impl App {
 
     pub fn add_action(&mut self, action: Action) {
         self.actions.push_back(action);
+        println!("Actions: {}, States: {}", &self.actions.len(), &self.states.len());
     }
 
     fn refresh(&mut self) {
         while let Some(action) = self.actions.pop_front() {
             match action {
-                Action::None => (),
                 Action::Error(msg) => panic!("{msg}"),
                 Action::Create(state) => self.states.push(state),
                 Action::Destroy => drop(self.states.pop()),
@@ -31,26 +31,28 @@ impl App {
                     self.states.push(state);
                 }
             }
+
+            println!("Actions: {}, States: {}", &self.actions.len(), &self.states.len());
         }
     }
 }
 
-impl EventHandler for App {
-    fn update(&mut self, context: &mut Context) -> Result<(), GameError> {
+impl EventHandler<()> for App {
+    fn update(&mut self, context: &mut Context) -> Result<(), ()> {
         self.refresh();
 
         let index = self.states.len() - 1;
         match self.states[index].update(context) {
             Ok(()) => Ok(()),
-            Err(_) => todo!(),
+            Err(_) => Err(()),
         }
     }
 
-    fn draw(&mut self, context: &mut Context) -> Result<(), GameError> {
+    fn draw(&mut self, context: &mut Context) -> Result<(), ()> {
         let index = self.states.len() - 1;
         match self.states[index].draw(context) {
             Ok(()) => Ok(()),
-            Err(_) => todo!(),
+            Err(action) => Ok(self.add_action(action)),
         }
     }
 }

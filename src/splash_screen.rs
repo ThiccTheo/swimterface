@@ -1,3 +1,5 @@
+use crate::state::{State, Action};
+
 use std::time::{Duration, Instant};
 
 use ggez::{
@@ -24,12 +26,12 @@ impl SplashScreen {
     }
 }
 
-impl EventHandler for SplashScreen {
-    fn update(&mut self, context: &mut Context) -> Result<(), GameError> {
+impl EventHandler<Action> for SplashScreen {
+    fn update(&mut self, _context: &mut Context) -> Result<(), Action> {
         Ok(())
     }
 
-    fn draw(&mut self, context: &mut Context) -> Result<(), GameError> {
+    fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
         let mut canvas =
             Canvas::from_frame(context, CanvasLoadOp::Clear(Color::from_rgb(219, 240, 254)));
 
@@ -45,6 +47,10 @@ impl EventHandler for SplashScreen {
 
         canvas.finish(context).expect("Failed to render!");
 
-        Ok(())
+        if self.timer.elapsed().as_secs() == self.duration.as_secs() {
+            Err(Action::Destroy)
+        } else {
+            Ok(())
+        }
     }
 }
