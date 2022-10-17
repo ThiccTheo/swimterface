@@ -1,6 +1,6 @@
 use crate::state::{Action, State};
+use ggez::{event::EventHandler, graphics::Color, Context};
 use std::collections::VecDeque;
-use ggez::{event::EventHandler, Context, GameError};
 
 pub struct App {
     states: Vec<State>,
@@ -8,6 +8,8 @@ pub struct App {
 }
 
 impl App {
+    pub const BG_COLOR: Color = Color::new(219.0 / 255.0, 240.0 / 255.0, 254.0 / 255.0, 1.0);
+
     pub fn new() -> Self {
         Self {
             states: Vec::<State>::new(),
@@ -17,7 +19,6 @@ impl App {
 
     pub fn add_action(&mut self, action: Action) {
         self.actions.push_back(action);
-        println!("Actions: {}, States: {}", &self.actions.len(), &self.states.len());
     }
 
     fn refresh(&mut self) {
@@ -31,8 +32,6 @@ impl App {
                     self.states.push(state);
                 }
             }
-
-            println!("Actions: {}, States: {}", &self.actions.len(), &self.states.len());
         }
     }
 }
@@ -41,7 +40,7 @@ impl EventHandler<()> for App {
     fn update(&mut self, context: &mut Context) -> Result<(), ()> {
         self.refresh();
 
-        let index = self.states.len() - 1;
+        let index = (self.states.len() - 1).clamp(0, usize::MAX);
         match self.states[index].update(context) {
             Ok(()) => Ok(()),
             Err(_) => Err(()),
@@ -49,7 +48,7 @@ impl EventHandler<()> for App {
     }
 
     fn draw(&mut self, context: &mut Context) -> Result<(), ()> {
-        let index = self.states.len() - 1;
+        let index = (self.states.len() - 1).clamp(0, usize::MAX);
         match self.states[index].draw(context) {
             Ok(()) => Ok(()),
             Err(action) => Ok(self.add_action(action)),

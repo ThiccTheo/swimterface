@@ -1,13 +1,13 @@
-use crate::state::{State, Action};
-
-use std::time::{Duration, Instant};
-
+use crate::app::App;
+use crate::state::Action;
+use crate::user_selection::UserSelection;
 use ggez::{
     event::EventHandler,
-    graphics::{Canvas, CanvasLoadOp, Color, DrawParam, Image},
+    graphics::{Canvas, CanvasLoadOp, DrawParam, Image},
     mint::Point2,
-    Context, GameError,
+    Context,
 };
+use std::time::{Duration, Instant};
 
 pub struct SplashScreen {
     logo: Image,
@@ -32,8 +32,7 @@ impl EventHandler<Action> for SplashScreen {
     }
 
     fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
-        let mut canvas =
-            Canvas::from_frame(context, CanvasLoadOp::Clear(Color::from_rgb(219, 240, 254)));
+        let mut canvas = Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
         canvas.draw(
             &self.logo,
@@ -48,7 +47,7 @@ impl EventHandler<Action> for SplashScreen {
         canvas.finish(context).expect("Failed to render!");
 
         if self.timer.elapsed().as_secs() == self.duration.as_secs() {
-            Err(Action::Destroy)
+            Err(Action::Change(Box::new(UserSelection::new())))
         } else {
             Ok(())
         }

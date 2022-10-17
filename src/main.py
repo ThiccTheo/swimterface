@@ -1,4 +1,4 @@
-from sys import argv
+from sys import argv, stdout
 from urllib.request import HTTPCookieProcessor, build_opener
 from bs4 import BeautifulSoup
 
@@ -12,6 +12,7 @@ def main():
 
     soup = BeautifulSoup(webpage, "html.parser")
     title = soup.title.text.strip()
+
     table = soup.find("div", {"id": "js-swimmer-profile-times"}).table
     header = (
         table.thead.text.strip()
@@ -23,7 +24,7 @@ def main():
 
     swimmer_name = title[: title.index("|", 0)].strip().replace(" ", "_").lower()
 
-    with open(f"assets\\data\\user_{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
+    with open(f"assets\\data\\{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
         dst.write(f"{title}\n{header}\n")
 
         rows = body.find_all("tr")
@@ -37,6 +38,8 @@ def main():
 
             entry = entry.replace("| X |", "|").replace("|  |", "|").strip()
             dst.write(f"{entry}\n")
+
+    stdout.write(f"{swimmer_name}.txt")
 
 
 if __name__ == "__main__":

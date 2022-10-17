@@ -1,6 +1,5 @@
-use std::fmt::{Debug, Formatter, Result as FmtResult};
-
 use ggez::event::EventHandler;
+use std::fmt::{Debug, Formatter, Result as FmtResult};
 
 pub type State = Box<dyn EventHandler<Action>>;
 
