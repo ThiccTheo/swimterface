@@ -1,5 +1,3 @@
-use std::thread::panicking;
-
 use ggez::{
     event::EventHandler,
     graphics::{Canvas, CanvasLoadOp, Color, DrawParam, Text},
@@ -44,7 +42,9 @@ impl EventHandler<Action> for Profile {
     fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
         let mut canvas = Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
-        let text = Text::new(format!("Stats for {}:", self.name.clone()));
+        let mut text = Text::new(format!("Stats for {}:", self.name.clone()));
+        text.set_font("comfortaa_regular");
+        text.set_scale(40.0);
         canvas.draw(&text, DrawParam::default().color(Color::BLACK));
 
         canvas.finish(context).expect("Failed to render!");

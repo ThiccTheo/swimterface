@@ -18,10 +18,10 @@ pub struct SplashScreen {
 impl SplashScreen {
     pub fn new(context: &Context) -> Self {
         Self {
-            logo: Image::from_path(context, "\\transparent_logo.png")
+            logo: Image::from_path(context, "\\images\\transparent_logo.png")
                 .expect("Failed to create image!"),
             timer: Instant::now(),
-            duration: Duration::from_secs(5),
+            duration: Duration::from_secs(1),
         }
     }
 }

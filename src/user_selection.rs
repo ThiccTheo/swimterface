@@ -46,8 +46,12 @@ impl EventHandler<Action> for UserSelection {
             self.user_id.push('9');
         } else if context.keyboard.is_key_just_pressed(KeyCode::Back) {
             self.user_id.pop();
-        } else if context.keyboard.is_key_just_pressed(KeyCode::Return) {
+        } else if context.keyboard.is_key_just_pressed(KeyCode::Return) && self.user_id.len() > 0 {
             self.is_entered = true;
+        }
+
+        while self.user_id.len() > 7 {
+            self.user_id.pop();
         }
 
         Ok(())
@@ -57,9 +61,10 @@ impl EventHandler<Action> for UserSelection {
         let mut canvas =
             Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
-        let mut text = Text::new("Enter Swimcloud ID\n(Number in URL): ");
+        let mut text = Text::new("Enter a Swimcloud ID (number in URL):\n\n");
         text.add(self.user_id.clone().as_str());
         text.set_scale(70.0);
+        text.set_font("comfortaa_regular");
         canvas.draw(&text, DrawParam::default().dest(Point2 { x: 0.0, y: 0.0 }).color(Color::BLACK));
 
         canvas.finish(context).expect("Failed to render!");
@@ -81,6 +86,8 @@ impl EventHandler<Action> for UserSelection {
             for ascii_value in output.stdout {
                 src.push(ascii_value as char);
             }
+
+            println!("{src}");
             
             Err(Action::Create(Box::new(Profile::new(src))))
 

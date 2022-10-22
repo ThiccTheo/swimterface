@@ -1,13 +1,12 @@
-Ivan Manolov | Swimcloud
-Event | Time | Meet | Date
-50 Y Free | 22.30 | U | IL NASA Winter Blast Off | Nov 30, 2018 |
-100 Y Free | 55.50 | U | Greg's Super Splash | Jun 16, 2011 |
-50 Y Breast | 27.07 | CCIW Swimming Championships | Feb 10, 2006 |
-50 L Breast | 33.70 | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |
-100 Y Breast | 58.97 | CCIW Swimming Championships | Feb 10, 2006 |
-100 L Breast | 1:14.24 | 42nd Bulgarian Masters Championship | Sep 07, 2020 |
-200 Y Breast | 2:06.45 | U | Greg's Super Splash | Jun 16, 2011 |
-200 L Breast | 2:47.48 | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |
-200 Y IM | 2:03.71 | CCIW Swimming Championships | Feb 09, 2006 |
-200 S IM | 2:39.60 | 3rd International Masters Tournament - Rodopa Smolyan | Apr 02, 2022 |
-200 L IM | 2:39.29 | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |
+| Event | Time | Meta | Meet | Date |$
+| 50 Y Free | 22.30 | U | IL NASA Winter Blast Off | Nov 30, 2018 |$
+| 100 Y Free | 55.50 | U | Greg's Super Splash | Jun 16, 2011 |$
+| 50 Y Breast | 27.07 | X | CCIW Swimming Championships | Feb 10, 2006 |$
+| 50 L Breast | 33.70 |  | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |$
+| 100 Y Breast | 58.97 |  | CCIW Swimming Championships | Feb 10, 2006 |$
+| 100 L Breast | 1:14.24 |  | 42nd Bulgarian Masters Championship | Sep 07, 2020 |$
+| 200 Y Breast | 2:06.45 | U | Greg's Super Splash | Jun 16, 2011 |$
+| 200 L Breast | 2:47.48 |  | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |$
+| 200 Y IM | 2:03.71 |  | CCIW Swimming Championships | Feb 09, 2006 |$
+| 200 S IM | 2:39.60 |  | 3rd International Masters Tournament - Rodopa Smolyan | Apr 02, 2022 |$
+| 200 L IM | 2:39.29 |  | 1st Cyprus International Masters Swim Meet | Oct 22, 2016 |
