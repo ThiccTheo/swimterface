@@ -18,7 +18,9 @@ def create_data(user_id):
 
     swimmer_name = title[: title.index("|", 0)].strip().replace(" ", "_").lower()
 
-    with open(f"assets\\data\\{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
+    with open(
+        f"assets\\data\\{swimmer_name}_unformatted.txt", "w", encoding="UTF-8"
+    ) as dst:
         dst.write(f"{header}\n")
 
         rows = body.find_all("tr")
@@ -43,10 +45,14 @@ def create_data(user_id):
 
 
 def beautify_data(swimmer_name):
-    with open(f"assets\\data\\{swimmer_name}.txt", "r", encoding="UTF-8") as src:
+    with open(
+        f"assets\\data\\{swimmer_name}_unformatted.txt", "r", encoding="UTF-8"
+    ) as src:
         rows = src.readlines()
 
-    with open(f"assets\\data\\{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
+    with open(
+        f"assets\\data\\{swimmer_name}_formatted.txt", "w", encoding="UTF-8"
+    ) as dst:
         max_lengths = [0, 0, 0, 0]
 
         for row in rows:
@@ -73,4 +79,4 @@ def beautify_data(swimmer_name):
 
             dst.write(f"{entry.strip()}\n")
 
-    return f"{swimmer_name}.txt"
+    return f"{swimmer_name}_formatted.txt"

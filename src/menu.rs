@@ -40,13 +40,13 @@ impl EventHandler<Action> for Menu {
             &text1,
             DrawParam::default()
                 .color(Color::BLACK)
-                .dest(Point2 { x: 280.0, y: 170.0 }),
+                .dest(Point2 { x: 300.0, y: 170.0 }),
         );
         canvas.draw(
             &text2,
             DrawParam::default()
                 .color(Color::BLACK)
-                .dest(Point2 { x: 280.0, y: 450.0 }),
+                .dest(Point2 { x: 270.0, y: 450.0 }),
         );
 
         canvas.finish(context).expect("Failed to render!");

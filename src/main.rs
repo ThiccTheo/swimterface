@@ -17,7 +17,10 @@ use ggez::{
 };
 use splash_screen::SplashScreen;
 use state::Action;
-use std::path::PathBuf;
+use std::{
+    fs::{create_dir, remove_dir_all},
+    path::PathBuf,
+};
 
 const RESOLUTION: Point2<f32> = Point2 {
     x: 1280.0,
@@ -26,6 +29,12 @@ const RESOLUTION: Point2<f32> = Point2 {
 
 fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+
+    let mut data = root.clone();
+    data.push("assets\\data");
+    remove_dir_all(data.clone()).unwrap();
+    create_dir(data.clone()).unwrap();
+
     let mut resource_path = root.clone();
     resource_path.push("assets");
 

@@ -37,7 +37,7 @@ impl Profile {
             let data = read_to_string(path).expect("Failed to read data!");
 
             Self {
-                name: full_name.replace(".txt", "").trim().to_string(),
+                name: full_name.replace("formatted.txt", "").trim().to_string(),
                 data,
                 is_active: true,
             }

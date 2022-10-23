@@ -1,8 +1,0 @@
-Event        Time    Meet                        Date
-50 Y Free    38.94   PACK Open Invitational Meet Nov 07, 2015
-100 Y Free   1:23.24 PACK Open Invitational Meet Nov 08, 2015
-50 Y Back    45.57   PACK Open Invitational Meet Nov 07, 2015
-100 Y Back   1:36.02 PACK Open Invitational Meet Nov 08, 2015
-50 Y Breast  52.20   PACK Open Invitational Meet Nov 07, 2015
-100 Y Breast 1:51.10 PACK Open Invitational Meet Nov 07, 2015
-100 Y IM     1:39.21 PACK Open Invitational Meet Nov 07, 2015
