@@ -1,11 +1,12 @@
 use std::{path::PathBuf, process::Command};
 
-use crate::{state::Action, app::App, profile::Profile};
+use crate::{app::App, profile::Profile, state::Action};
 use ggez::{
     event::EventHandler,
-    graphics::{Canvas, CanvasLoadOp, Text, DrawParam, Color},
+    graphics::{Canvas, CanvasLoadOp, Color, DrawParam, Text},
     input::keyboard::KeyCode,
-    Context, mint::Point2,
+    mint::Point2,
+    Context,
 };
 
 pub struct UserSelection {
@@ -58,14 +59,18 @@ impl EventHandler<Action> for UserSelection {
     }
 
     fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
-        let mut canvas =
-            Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
+        let mut canvas = Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
         let mut text = Text::new("Enter a Swimcloud ID (number in URL):\n\n");
         text.add(self.user_id.clone().as_str());
         text.set_scale(70.0);
         text.set_font("comfortaa_regular");
-        canvas.draw(&text, DrawParam::default().dest(Point2 { x: 0.0, y: 0.0 }).color(Color::BLACK));
+        canvas.draw(
+            &text,
+            DrawParam::default()
+                .dest(Point2 { x: 0.0, y: 0.0 })
+                .color(Color::BLACK),
+        );
 
         canvas.finish(context).expect("Failed to render!");
 
@@ -88,9 +93,8 @@ impl EventHandler<Action> for UserSelection {
             }
 
             println!("{src}");
-            
-            Err(Action::Create(Box::new(Profile::new(src))))
 
+            Err(Action::Create(Box::new(Profile::new(src))))
         } else {
             Ok(())
         }

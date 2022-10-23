@@ -8,7 +8,8 @@ use app::App;
 use ggez::{
     conf::{/*FullscreenType, */ WindowMode, WindowSetup},
     event::run,
-    ContextBuilder, graphics::FontData,
+    graphics::FontData,
+    ContextBuilder,
 };
 use splash_screen::SplashScreen;
 use state::Action;
@@ -36,7 +37,10 @@ fn main() {
         .build()
         .expect("Could not start application!");
 
-    context.gfx.add_font("comfortaa_regular", FontData::from_path(&context, "\\fonts\\comfortaa_regular.ttf").unwrap());
+    context.gfx.add_font(
+        "comfortaa_regular",
+        FontData::from_path(&context, "\\fonts\\comfortaa_regular.ttf").unwrap(),
+    );
     let mut app = App::new();
     app.add_action(Action::Create(Box::new(SplashScreen::new(&context))));
 

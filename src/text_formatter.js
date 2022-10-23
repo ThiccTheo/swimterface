@@ -1,3 +1,19 @@
+// url = "https://onlinetexttools.com/convert-text-to-nice-columns?"
+
+// params = {
+//     "input": data,
+//     "input-element-separator": "|",
+//     "input-row-separator": "$",
+//     "output-element-separator": "|",
+//     "output-row-separator": "\n",
+//     "align-separator-by-columns": "true",
+//     "separator-everywhere": "true",
+//     "left-align": "true",
+// }
+
+// url += urlencode(params, encoding="UTF-8")
+
+
 window.bridges["convert-nice-columns-to-text"] = function () {
     var i = function (t) {
         var r = this,
