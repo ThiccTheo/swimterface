@@ -24,7 +24,6 @@ impl App {
     fn refresh(&mut self) {
         while let Some(action) = self.actions.pop_front() {
             match action {
-                Action::Error(msg) => panic!("{msg}"),
                 Action::Create(state) => self.states.push(state),
                 Action::Destroy => drop(self.states.pop()),
                 Action::Change(state) => {

@@ -4,7 +4,6 @@ use std::fmt::{Debug, Formatter, Result as FmtResult};
 pub type State = Box<dyn EventHandler<Action>>;
 
 pub enum Action {
-    Error(String),
     Create(State),
     Destroy,
     Change(State),
