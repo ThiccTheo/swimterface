@@ -1,9 +1,12 @@
 import imp
+from turtle import title
 from urllib.request import HTTPCookieProcessor, build_opener
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
-from selenium.webdriver.chrome.service import Service
-from selenium import webdriver
+from selenium.webdriver import Firefox
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.common.by import By
 
 
 def create_data(user_id):
@@ -47,29 +50,38 @@ def create_data(user_id):
 def beautify_data(swimmer_name):
     with open(f"assets\\data\\{swimmer_name}.txt", "r", encoding="UTF-8") as src:
         data = src.read()
-
-    url = "https://onlinetexttools.com/convert-text-to-nice-columns?" + urlencode(params, encoding="UTF-8")
+    
+    url = "https://onlinetexttools.com/convert-text-to-nice-columns?"
 
     params = {
         "input": data,
         "input-element-separator": "|",
         "input-row-separator": "$",
         "output-element-separator": "|",
-        "&output-row-separator": "\n",
+        "output-row-separator": "\n",
         "align-separator-by-columns": "true",
         "separator-everywhere": "true",
         "left-align": "true",
     }
 
-    service = Service()
-    driver = webdriver.Chrome(service=service)
+    url += urlencode(params, encoding="UTF-8")
+
+    driver = Firefox(service=FirefoxService(GeckoDriverManager().install()))
     driver.get(url)
 
-    soup = BeautifulSoup(driver.page_source, "lxml")
-    print(soup.title.text)
-    textarea = soup.find(name="textarea", attrs={"class": "data", "readonly": ""})
+    driver.implicitly_wait(0.5)
+    textareas = driver.find_elements(By.TAG_NAME, "textarea")
+    textarea = driver.find_element(By.CLASS_NAME, "data")
+    driver.quit()
 
-    with open(f"assets\\data\\{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
-        dst.write(textarea.text)
+    # # print(f"{soup.title.text} and other stuff")
+    # # textarea = soup.find(name="textarea", attrs={"class": "data", "readonly": ""})
+
+    # Writing the data to a file.
+    # with open(f"assets\\data\\{swimmer_name}.txt", "w", encoding="UTF-8") as dst:
+    #     for textarea in textareas:
+    #         dst.write(textarea.text)
+
+    driver.quit()
 
     return f"{swimmer_name}.txt"
