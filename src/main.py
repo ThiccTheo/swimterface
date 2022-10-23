@@ -6,7 +6,6 @@ def main():
     swimmer_name = create_data(argv[1])
     text = beautify_data(swimmer_name)
     stdout.write(text)
-    
 
 
 if __name__ == "__main__":

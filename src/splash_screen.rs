@@ -1,6 +1,5 @@
-use crate::app::App;
 use crate::state::Action;
-use crate::user_selection::UserSelection;
+use crate::{app::App, menu::Menu};
 use ggez::{
     event::EventHandler,
     graphics::{Canvas, CanvasLoadOp, DrawParam, Image},
@@ -21,7 +20,7 @@ impl SplashScreen {
             logo: Image::from_path(context, "\\images\\transparent_logo.png")
                 .expect("Failed to create image!"),
             timer: Instant::now(),
-            duration: Duration::from_secs(1),
+            duration: Duration::from_secs(3),
         }
     }
 }
@@ -47,7 +46,7 @@ impl EventHandler<Action> for SplashScreen {
         canvas.finish(context).expect("Failed to render!");
 
         if self.timer.elapsed().as_secs() == self.duration.as_secs() {
-            Err(Action::Change(Box::new(UserSelection::new())))
+            Err(Action::Change(Box::new(Menu::new())))
         } else {
             Ok(())
         }

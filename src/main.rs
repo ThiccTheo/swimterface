@@ -1,4 +1,7 @@
+//1644519
+
 mod app;
+mod menu;
 mod profile;
 mod splash_screen;
 mod state;
@@ -9,11 +12,17 @@ use ggez::{
     conf::{/*FullscreenType, */ WindowMode, WindowSetup},
     event::run,
     graphics::FontData,
+    mint::Point2,
     ContextBuilder,
 };
 use splash_screen::SplashScreen;
 use state::Action;
 use std::path::PathBuf;
+
+const RESOLUTION: Point2<f32> = Point2 {
+    x: 1280.0,
+    y: 720.0,
+};
 
 fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
@@ -28,7 +37,7 @@ fn main() {
         .icon("\\images\\transparent_logo.png")
         .vsync(true);
 
-    let window_mode = WindowMode::default().dimensions(1280.0, 720.0);
+    let window_mode = WindowMode::default().dimensions(RESOLUTION.x, RESOLUTION.y);
     //.fullscreen_type(FullscreenType::True);
 
     let (mut context, event_loop) = context_builder

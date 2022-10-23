@@ -12,6 +12,7 @@ use ggez::{
 pub struct UserSelection {
     user_id: String,
     is_entered: bool,
+    is_active: bool,
 }
 
 impl UserSelection {
@@ -19,6 +20,7 @@ impl UserSelection {
         Self {
             user_id: String::new(),
             is_entered: false,
+            is_active: true,
         }
     }
 }
@@ -49,6 +51,8 @@ impl EventHandler<Action> for UserSelection {
             self.user_id.pop();
         } else if context.keyboard.is_key_just_pressed(KeyCode::Return) && self.user_id.len() > 0 {
             self.is_entered = true;
+        } else if context.keyboard.is_key_just_pressed(KeyCode::Space) {
+            self.is_active = false;
         }
 
         while self.user_id.len() > 7 {
@@ -61,14 +65,22 @@ impl EventHandler<Action> for UserSelection {
     fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
         let mut canvas = Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
-        let mut text = Text::new("Enter a Swimcloud ID (number in URL):\n\n");
-        text.add(self.user_id.clone().as_str());
-        text.set_scale(70.0);
-        text.set_font("comfortaa_regular");
+        let mut text1 = Text::new("Enter a Swimcloud ID:\n\n       _______");
+        let mut text2 = Text::new(self.user_id.clone().as_str());
+
+        text1.set_scale(100.0);
         canvas.draw(
-            &text,
+            &text1,
             DrawParam::default()
-                .dest(Point2 { x: 0.0, y: 0.0 })
+                .dest(Point2 { x: 100.0, y: 100.0 })
+                .color(Color::BLACK),
+        );
+
+        text2.set_scale(100.0);
+        canvas.draw(
+            &text2,
+            DrawParam::default()
+                .dest(Point2 { x: 470.0, y: 300.0 })
                 .color(Color::BLACK),
         );
 
@@ -92,9 +104,9 @@ impl EventHandler<Action> for UserSelection {
                 src.push(ascii_value as char);
             }
 
-            println!("{src}");
-
-            Err(Action::Create(Box::new(Profile::new(src))))
+            Err(Action::Change(Box::new(Profile::new(src))))
+        } else if !self.is_active {
+            Err(Action::Destroy)
         } else {
             Ok(())
         }

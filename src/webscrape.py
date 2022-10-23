@@ -65,7 +65,7 @@ def beautify_data(swimmer_name):
 
             for index, col in enumerate(cols):
                 additional_spaces = max_lengths[index] - col.__len__()
-                additional_spaces += 1
+                additional_spaces += 3
                 entry += col
 
                 for i in range(0, additional_spaces):
