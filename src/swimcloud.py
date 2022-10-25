@@ -1,8 +1,9 @@
+from sys import stdout
 from urllib.request import HTTPCookieProcessor, build_opener
 from bs4 import BeautifulSoup
 
 
-def create_data(user_id):
+def create_swimmer_data(user_id):
     opener = build_opener(HTTPCookieProcessor())
     url = f"https://www.swimcloud.com/swimmer/{user_id.strip()}/"
 
@@ -44,7 +45,7 @@ def create_data(user_id):
     return swimmer_name
 
 
-def beautify_data(swimmer_name):
+def beautify_swimmer_data(swimmer_name):
     with open(
         f"assets\\data\\{swimmer_name}_unformatted.txt", "r", encoding="UTF-8"
     ) as src:
@@ -79,4 +80,4 @@ def beautify_data(swimmer_name):
 
             dst.write(f"{entry.strip()}\n")
 
-    return f"{swimmer_name}_formatted.txt"
+    stdout.write(f"{swimmer_name}_formatted.txt")

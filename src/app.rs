@@ -8,7 +8,11 @@ pub struct App {
 }
 
 impl App {
-    pub const BG_COLOR: Color = Color::new(219.0 / 255.0, 240.0 / 255.0, 254.0 / 255.0, 1.0);
+    pub const BG_COLOR: Color =
+        Color::new(200.0 / 255.0, 240.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0);
+
+    pub const SELECTION_COLOR: Color =
+        Color::new(7.0 / 255.0, 58.0 / 255.0, 175.0 / 255.0, 255.0 / 255.0);
 
     pub fn new() -> Self {
         Self {

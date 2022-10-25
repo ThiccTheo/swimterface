@@ -59,7 +59,7 @@ impl EventHandler<Action> for Profile {
     fn draw(&mut self, context: &mut Context) -> Result<(), Action> {
         let mut canvas = Canvas::from_frame(context, CanvasLoadOp::Clear(App::BG_COLOR));
 
-        let mut text = Text::new(format!("Stats for {}:\n", self.name.clone()));
+        let mut text = Text::new(format!("Stats for {}:\n\n", self.name.clone()));
         text.add(self.data.clone());
         text.set_scale(26.0);
         text.set_bounds(Point2 {
