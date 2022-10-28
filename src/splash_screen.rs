@@ -20,7 +20,7 @@ impl SplashScreen {
             logo: Image::from_path(context, "\\images\\transparent_logo.png")
                 .expect("Failed to create image!"),
             timer: Instant::now(),
-            duration: Duration::from_secs(3),
+            duration: Duration::from_secs(7),
         }
     }
 }

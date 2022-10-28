@@ -14,7 +14,7 @@ mod women_scy;
 
 use app::App;
 use ggez::{
-    conf::{FullscreenType, WindowMode, WindowSetup},
+    conf::{/*FullscreenType, */WindowMode, WindowSetup},
     event::run,
     graphics::FontData,
     mint::Point2,
@@ -62,8 +62,8 @@ fn main() {
         .vsync(true);
 
     let window_mode = WindowMode::default()
-        .dimensions(RESOLUTION.x, RESOLUTION.y)
-        .fullscreen_type(FullscreenType::True);
+        .dimensions(RESOLUTION.x, RESOLUTION.y);
+        //.fullscreen_type(FullscreenType::True);
 
     let (mut context, event_loop) = context_builder
         .window_setup(window_setup)

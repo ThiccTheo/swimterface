@@ -84,6 +84,7 @@ impl EventHandler<Action> for UserSelection {
                 .color(Color::BLACK),
         );
 
+
         canvas.finish(context).expect("Failed to render!");
 
         if self.is_entered {
